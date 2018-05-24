@@ -42,16 +42,17 @@ bool 	get_tip (int tip_number, int tip[TIP_SIZE])
 
   char tip_line[MAX_LINE_LEN] = {0};
   int count = 0;
-  char* line = fgets(tip_line, MAX_LINE_LEN, fd);
+  char* line ;
 
-  while (line != NULL && count < tip_number) {
+  do{
     line = fgets(tip_line, MAX_LINE_LEN, fd);
     count++;
     if (tip_line != line) {
       fclose(fd);
       return false;
-    }
-  }
+      }
+    }while (line != NULL & count <= tip_number);
+
   if (ftell(fd) == EOF) {
     fclose(fd);
     return false;
